@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'MGSelector_Example' do
+  pod 'MGSelector', :path => '../'
+
+  target 'MGSelector_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
