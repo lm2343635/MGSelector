@@ -1,5 +1,6 @@
 # MGSelector
 
+![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
 [![CI Status](https://img.shields.io/travis/lm2343635/MGSelector.svg?style=flat)](https://travis-ci.org/lm2343635/MGSelector)
 [![Version](https://img.shields.io/cocoapods/v/MGSelector.svg?style=flat)](https://cocoapods.org/pods/MGSelector)
 [![License](https://img.shields.io/cocoapods/l/MGSelector.svg?style=flat)](https://cocoapods.org/pods/MGSelector)
