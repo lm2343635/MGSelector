@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'MGSelector'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of MGSelector.'
+  s.summary          = 'A customized table selector for iOS.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -32,11 +32,5 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'MGSelector/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'MGSelector' => ['MGSelector/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'SnapKit', '~> 4'
 end

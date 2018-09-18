@@ -1,0 +1,23 @@
+PODS:
+  - MGSelector (0.1.0):
+    - SnapKit (~> 4)
+  - SnapKit (4.0.1)
+
+DEPENDENCIES:
+  - MGSelector (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SnapKit
+
+EXTERNAL SOURCES:
+  MGSelector:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MGSelector: e7537e62f671e48885e823e4c4db0983c664314c
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+
+PODFILE CHECKSUM: 57296a71a169e8550c4549d9f05fea3d25a5b756
+
+COCOAPODS: 1.5.3

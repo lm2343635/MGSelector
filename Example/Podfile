@@ -1,11 +1,10 @@
 use_frameworks!
+platform :ios, '9.0'
 
 target 'MGSelector_Example' do
   pod 'MGSelector', :path => '../'
 
   target 'MGSelector_Tests' do
-    inherit! :search_paths
-
-    
+    inherit! :search_paths    
   end
 end
