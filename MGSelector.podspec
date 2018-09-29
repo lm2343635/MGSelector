@@ -30,7 +30,9 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'MGSelector/Classes/**/*'
-  
+  s.source_files = 'Sources/**/*'
+  s.resource_bundles = {
+      'MGSelector' => ['MGSelector/**/*.{storyboard,xib,xcassets,png}']
+  }
   s.dependency 'SnapKit', '~> 4'
 end

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MGSelectable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,5 +20,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func open(_ sender: Any) {
+        openSelector()
+    }
+    
 }
 
