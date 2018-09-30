@@ -17,6 +17,8 @@
 		77DE0C032161DA50008B2C37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77DE0C002161DA50008B2C37 /* Images.xcassets */; };
 		77DE0C042161DA50008B2C37 /* MGSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DE0C012161DA50008B2C37 /* MGSelector.swift */; };
 		77DE0C052161DA50008B2C37 /* MGSelectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DE0C022161DA50008B2C37 /* MGSelectable.swift */; };
+		77DE0C072161DE37008B2C37 /* MGSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DE0C062161DE37008B2C37 /* MGSelectTableViewCell.swift */; };
+		77DE0C092161E547008B2C37 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77DE0C082161E547008B2C37 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		77DE0C002161DA50008B2C37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		77DE0C012161DA50008B2C37 /* MGSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MGSelector.swift; sourceTree = "<group>"; };
 		77DE0C022161DA50008B2C37 /* MGSelectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MGSelectable.swift; sourceTree = "<group>"; };
+		77DE0C062161DE37008B2C37 /* MGSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGSelectTableViewCell.swift; sourceTree = "<group>"; };
+		77DE0C082161E547008B2C37 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A4B9798DB64E9EC5C61B35BF /* Pods-MGSelector_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSelector_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MGSelector_Example/Pods-MGSelector_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C9C8BFD05F8C328B860E22C2 /* Pods-MGSelector_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSelector_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MGSelector_Example/Pods-MGSelector_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +94,7 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				77DE0C082161E547008B2C37 /* Localizable.strings */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -111,6 +116,7 @@
 				77DE0C002161DA50008B2C37 /* Images.xcassets */,
 				77DE0C022161DA50008B2C37 /* MGSelectable.swift */,
 				77DE0C012161DA50008B2C37 /* MGSelector.swift */,
+				77DE0C062161DE37008B2C37 /* MGSelectTableViewCell.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -188,6 +194,7 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				77DE0BFE2161DA1A008B2C37 /* README.md in Resources */,
+				77DE0C092161E547008B2C37 /* Localizable.strings in Resources */,
 				77DE0C032161DA50008B2C37 /* Images.xcassets in Resources */,
 				77DE0BFC2161DA13008B2C37 /* LICENSE in Resources */,
 				77DE0BFA2161DA04008B2C37 /* MGSelector.podspec in Resources */,
@@ -241,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				77DE0C072161DE37008B2C37 /* MGSelectTableViewCell.swift in Sources */,
 				77DE0C052161DA50008B2C37 /* MGSelectable.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				77DE0C042161DA50008B2C37 /* MGSelector.swift in Sources */,

@@ -8,6 +8,34 @@
 
 import UIKit
 
+fileprivate struct HeaderKeys {
+    var key: String
+}
+
+extension HeaderKeys: MGSelectorOption {
+    
+    var title: String {
+        return key
+    }
+    
+    var detail: String? {
+        return NSLocalizedString(key, comment: "")
+    }
+    
+}
+
+fileprivate struct Const {
+    static let keys = ["Accept", "Accept-Charset", "Accept-Encoding", "Accept-Language",
+                             "Accept-Datetime", "Authorization", "Cache-Control", "Connection",
+                             "Cookie", "Connection", "Content-Length", "Content-MD5", "Content-Type",
+                             "Date", "Expect", "Forwarded", "From", "Host", "If-Match", "If-Modified-Since",
+                             "If-None-Match", "If-Range", "If-Unmodified-Since", "Max-Forwards",
+                             "Origin", "Pragma", "Proxy-Authorization", "Range", "Referer",
+                             "User-Agent", "Upgrade", "Via", "Warning"]
+    
+    static let headerKeys = keys.map { HeaderKeys(key: $0) }
+}
+
 class ViewController: UIViewController, MGSelectable {
 
     override func viewDidLoad() {
@@ -21,7 +49,7 @@ class ViewController: UIViewController, MGSelectable {
     }
 
     @IBAction func open(_ sender: Any) {
-        openSelector()
+        openSelector(title: "Header Keys", options: Const.headerKeys)
     }
     
 }

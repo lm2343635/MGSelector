@@ -7,12 +7,17 @@
 
 import UIKit
 
+public protocol MGSelectorOption {
+    var title: String { get }
+    var detail: String? { get }
+}
+
 public protocol MGSelectable {}
 
 public extension MGSelectable where Self: UIViewController {
     
-    public func openSelector() {
-        let selector = MGSelectorViewController()
+    public func openSelector(title: String, options: [MGSelectorOption]) {
+        let selector = MGSelectorViewController(title: title, options: options)
         present(selector, animated: true)
     }
 }

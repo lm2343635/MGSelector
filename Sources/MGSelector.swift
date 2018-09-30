@@ -3,10 +3,11 @@ import UIKit
 import SnapKit
 
 fileprivate struct Const {
+    static let selectorCell = "selectorCell"
     static let margin = 16
     
     struct close {
-        static let size = 20
+        static let size = 30
     }
 }
 
@@ -14,39 +15,45 @@ class MGSelectorViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Title"
+        label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         return label
     }()
     
     private lazy var closeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "close_circle"), for: .normal)
+        button.setImage(fill(image: UIImage(named: "close"), with: .darkGray), for: .normal)
         button.addTarget(self, action: #selector(close), for: .touchUpInside)
         return button
     }()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.register(MGSelectTableViewCell.self, forCellReuseIdentifier: Const.selectorCell)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .clear
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.tableFooterView?.backgroundColor = .clear
+        tableView.separatorStyle = .none
         return tableView
     }()
     
     private lazy var backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
         return view
     }()
     
-    init() {
+    private let options: [MGSelectorOption]
+    
+    init(title: String, options: [MGSelectorOption]) {
+        self.options = options
         super.init(nibName: nil, bundle: nil)
-     
+        
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overCurrentContext
-        view.backgroundColor = UIColor(white: 0.6, alpha: 0.6)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        titleLabel.text = title
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -92,6 +99,10 @@ class MGSelectorViewController: UIViewController {
         
     }
     
+    @objc private func close() {
+        dismiss(animated: true)
+    }
+    
     private var bottomPadding: CGFloat {
         var bottom: CGFloat = 0
         if #available(iOS 11.0, *) {
@@ -102,21 +113,50 @@ class MGSelectorViewController: UIViewController {
         return bottom
     }
     
-    @objc private func close() {
-        dismiss(animated: true)
+    private func fill(image: UIImage?, with color: UIColor) -> UIImage? {
+        guard let image = image else {
+            return nil
+        }
+        UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.main.scale)
+        
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        color.setFill()
+        
+        context.translateBy(x: 0, y: image.size.height)
+        context.scaleBy(x: 1.0, y: -1.0)
+        
+        context.setBlendMode(CGBlendMode.colorBurn)
+        let rect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        context.draw(image.cgImage!, in: rect)
+        
+        context.setBlendMode(CGBlendMode.sourceIn)
+        context.addRect(rect)
+        context.drawPath(using: CGPathDrawingMode.fill)
+        
+        let coloredImg : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return coloredImg
     }
 }
 
 extension MGSelectorViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return options.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = "cell \(indexPath.row)"
-        cell.backgroundColor = .clear
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Const.selectorCell, for: indexPath) as? MGSelectTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.option = options[indexPath.row]
         return cell
     }
     
