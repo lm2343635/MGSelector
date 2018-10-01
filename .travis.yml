@@ -5,13 +5,13 @@
 osx_image: xcode10
 language: objective-c
 cache: cocoapods
-podfile: Podfile
+podfile: Example/Podfile
 
 before_install:
   - gem install cocoapods
   - pod repo update
-  - pod install
+  - pod install --project-directory=Example
 
 script:
-  - set -o pipefail && xcodebuild -workspace MGSelector.xcworkspace -scheme MGSelector-Example -sdk iphonesimulator build CODE_SIGNING_REQUIRED=NO | xcpretty -c 
+  - set -o pipefail && xcodebuild -workspace Example/MGSelector.xcworkspace -scheme MGSelector-Example -sdk iphonesimulator build CODE_SIGNING_REQUIRED=NO | xcpretty -c 
 
