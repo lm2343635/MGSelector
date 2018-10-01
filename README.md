@@ -10,15 +10,35 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
-
 ## Installation
 
 MGSelector is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'MGSelector'
+pod 'MGSelector', '~> 0.1'
+```
+
+## Documentation
+
+Prepare your model which confirms the MGSelectorModel protocol at first.
+```Swift
+struct Option: MGSelectorOption {
+var title: String
+var detail: String?
+}
+```
+Confirm the MGSelectable protocol in your view controller, and invokes the `openSelector` method.
+```Swift
+let options: [Options] = ...
+
+class ViewController: UIViewController, MGSelectable {
+    //...
+
+    @IBAction func open(_ sender: UIButton) {
+        openSelector(title: "Header Keys", options: options, theme: .dark)
+    }
+}
 ```
 
 ## Author
