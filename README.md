@@ -24,8 +24,8 @@ pod 'MGSelector', '~> 0.1'
 Prepare your model which confirms the MGSelectorModel protocol at first.
 ```Swift
 struct Option: MGSelectorOption {
-var title: String
-var detail: String?
+    var title: String
+    var detail: String?
 }
 ```
 Confirm the MGSelectable protocol in your view controller, and invokes the `openSelector` method.
@@ -36,7 +36,7 @@ class ViewController: UIViewController, MGSelectable {
     //...
 
     @IBAction func open(_ sender: UIButton) {
-        openSelector(title: "Header Keys", options: options, theme: .dark)
+        openSelector(title: "Title", options: options, theme: .dark)
     }
 }
 ```
