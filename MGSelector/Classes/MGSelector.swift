@@ -1,3 +1,28 @@
+//
+//  MGSelectorViewController.swift
+//  MGSelector
+//
+//  Created by Meng Li on 2018/09/21.
+//  Copyright © 2018 MuShare. All rights reserved.
+//
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 import UIKit
 import SnapKit
@@ -9,10 +34,6 @@ fileprivate struct Const {
     struct title {
         static let margin = 25
     }
-    
-    struct close {
-        static let size = 30
-    }
 }
 
 class MGSelectorViewController: UIViewController {
@@ -22,15 +43,6 @@ class MGSelectorViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         label.textColor = theme.mainColor
         return label
-    }()
-    
-    private lazy var closeButton: UIButton = {
-        let button = UIButton()
-        if let image = UIImage(named: "close") {
-            button.setImage(image.fill(with: theme.mainColor), for: .normal)
-        }
-        button.addTarget(self, action: #selector(close), for: .touchUpInside)
-        return button
     }()
     
     private lazy var tableView: UITableView = {
@@ -48,8 +60,18 @@ class MGSelectorViewController: UIViewController {
     private lazy var backgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = theme.backgroundColor
+        view.isUserInteractionEnabled = true
         return view
     }()
+    
+    private lazy var tapView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.addGestureRecognizer(tapGesture)
+        return view
+    }()
+    
+    private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
     
     private let theme: MGSelectorTheme
     private let options: [MGSelectorOption]
@@ -67,6 +89,10 @@ class MGSelectorViewController: UIViewController {
         titleLabel.text = title
     }
     
+    deinit {
+        view.removeGestureRecognizer(tapGesture)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -74,9 +100,9 @@ class MGSelectorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(tapView)
         view.addSubview(backgroundView)
         view.addSubview(titleLabel)
-        view.addSubview(closeButton)
         view.addSubview(tableView)
         createConstraints()
     }
@@ -97,13 +123,7 @@ class MGSelectorViewController: UIViewController {
         titleLabel.snp.makeConstraints {
             $0.bottom.equalTo(tableView.snp.top).offset(-Const.title.margin)
             $0.left.equalToSuperview().offset(Const.margin)
-            $0.right.equalTo(closeButton.snp.left).offset(-Const.title.margin)
-        }
-
-        closeButton.snp.makeConstraints {
-            $0.right.equalToSuperview().offset(-Const.margin)
-            $0.size.equalTo(Const.close.size)
-            $0.centerY.equalTo(titleLabel)
+            $0.right.equalToSuperview().offset(-Const.title.margin)
         }
         
         backgroundView.snp.makeConstraints {
@@ -113,6 +133,12 @@ class MGSelectorViewController: UIViewController {
             $0.top.equalTo(titleLabel.snp.top).offset(-Const.margin)
         }
         
+        tapView.snp.makeConstraints {
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.bottom.equalTo(backgroundView.snp.top)
+        }
     }
     
     private func setCorner() {
@@ -124,7 +150,7 @@ class MGSelectorViewController: UIViewController {
         maskLayer.path = path.cgPath
         backgroundView.layer.mask = maskLayer
     }
-
+    
     
     @objc private func close() {
         dismiss(animated: true)
@@ -169,35 +195,6 @@ extension MGSelectorViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelect(option: options[indexPath.row])
         dismiss(animated: true)
-    }
-    
-}
-
-fileprivate extension UIImage {
-    
-    func fill(with color: UIColor) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
-        
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return nil
-        }
-        color.setFill()
-        
-        context.translateBy(x: 0, y: size.height)
-        context.scaleBy(x: 1.0, y: -1.0)
-        
-        context.setBlendMode(CGBlendMode.colorBurn)
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        context.draw(cgImage!, in: rect)
-        
-        context.setBlendMode(CGBlendMode.sourceIn)
-        context.addRect(rect)
-        context.drawPath(using: CGPathDrawingMode.fill)
-        
-        let coloredImg : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        
-        return coloredImg
     }
     
 }

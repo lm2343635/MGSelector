@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MGSelector
 
 fileprivate struct HeaderKeys: MGSelectorOption {
     var title: String

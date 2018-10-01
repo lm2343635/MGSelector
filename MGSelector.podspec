@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MGSelector'
-  s.version          = '0.1.0'
+  s.version          = '0.1'
   s.summary          = 'A customized table selector for iOS.'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+MGSelector is a customized table selector for iOS.
                        DESC
 
   s.homepage         = 'https://github.com/lm2343635/MGSelector'
@@ -26,13 +26,10 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'lm2343635' => 'lm2343635@126.com' }
   s.source           = { :git => 'https://github.com/lm2343635/MGSelector.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://www.fczm.pw'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '8.2'
 
-  s.source_files = 'Sources/**/*'
-  s.resource_bundles = {
-    'MGSelector' => ['Sources/**/*.{storyboard,xib,xcassets,png}']
-  }
+  s.source_files = 'MGSelector/Classes/**/*'
   s.dependency 'SnapKit', '~> 4'
 end
