@@ -12,12 +12,15 @@ public protocol MGSelectorOption {
     var detail: String? { get }
 }
 
-public protocol MGSelectable {}
+public protocol MGSelectable: class {
+    func didSelect(option: MGSelectorOption)
+}
 
 public extension MGSelectable where Self: UIViewController {
     
     public func openSelector(title: String, options: [MGSelectorOption]) {
         let selector = MGSelectorViewController(title: title, options: options)
+        selector.delegate = self
         present(selector, animated: true)
     }
 }

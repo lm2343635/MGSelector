@@ -46,6 +46,8 @@ class MGSelectorViewController: UIViewController {
     
     private let options: [MGSelectorOption]
     
+    weak var delegate: MGSelectable?
+    
     init(title: String, options: [MGSelectorOption]) {
         self.options = options
         super.init(nibName: nil, bundle: nil)
@@ -163,6 +165,11 @@ extension MGSelectorViewController: UITableViewDataSource {
 }
 
 extension MGSelectorViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.didSelect(option: options[indexPath.row])
+        dismiss(animated: true)
+    }
     
 }
 

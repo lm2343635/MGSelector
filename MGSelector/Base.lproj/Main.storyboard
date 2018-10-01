@@ -12,7 +12,6 @@
         <!--MGSelector-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="MGSelector_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
@@ -38,7 +37,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="MGSelector" id="tKD-XT-vS9"/>
+                    <connections>
+                        <outlet property="button" destination="hzc-es-wHm" id="085-ap-t0P"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1112.8" y="24.7376311844078"/>
         </scene>

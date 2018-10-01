@@ -36,8 +36,10 @@ fileprivate struct Const {
     static let headerKeys = keys.map { HeaderKeys(key: $0) }
 }
 
-class ViewController: UIViewController, MGSelectable {
+class ViewController: UIViewController {
 
+    @IBOutlet weak var button: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -54,3 +56,10 @@ class ViewController: UIViewController, MGSelectable {
     
 }
 
+extension ViewController: MGSelectable {
+    
+    func didSelect(option: MGSelectorOption) {
+        button.setTitle(option.title, for: .normal)
+    }
+    
+}
