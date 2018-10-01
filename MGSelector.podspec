@@ -32,7 +32,7 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'Sources/**/*'
   s.resource_bundles = {
-      'MGSelector' => ['MGSelector/**/*.{storyboard,xib,xcassets,png}']
+    'MGSelector' => ['Sources/**/*.{storyboard,xib,xcassets,png}']
   }
   s.dependency 'SnapKit', '~> 4'
 end

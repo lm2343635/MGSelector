@@ -26,7 +26,9 @@ class MGSelectorViewController: UIViewController {
     
     private lazy var closeButton: UIButton = {
         let button = UIButton()
-        button.setImage(fill(image: UIImage(named: "close"), with: theme.mainColor), for: .normal)
+        if let image = UIImage(named: "close") {
+            button.setImage(image.fill(with: theme.mainColor), for: .normal)
+        }
         button.addTarget(self, action: #selector(close), for: .touchUpInside)
         return button
     }()
@@ -61,7 +63,7 @@ class MGSelectorViewController: UIViewController {
         
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overCurrentContext
-        view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        view.backgroundColor = theme.maskColor
         titleLabel.text = title
     }
     
@@ -77,6 +79,11 @@ class MGSelectorViewController: UIViewController {
         view.addSubview(closeButton)
         view.addSubview(tableView)
         createConstraints()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setCorner()
     }
     
     private func createConstraints() {
@@ -108,6 +115,17 @@ class MGSelectorViewController: UIViewController {
         
     }
     
+    private func setCorner() {
+        let path = UIBezierPath(roundedRect: backgroundView.bounds,
+                                byRoundingCorners: [.topRight, .topLeft],
+                                cornerRadii: CGSize(width: 10, height:  10))
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = backgroundView.bounds
+        maskLayer.path = path.cgPath
+        backgroundView.layer.mask = maskLayer
+    }
+
+    
     @objc private func close() {
         dismiss(animated: true)
     }
@@ -122,33 +140,7 @@ class MGSelectorViewController: UIViewController {
         return bottom
     }
     
-    private func fill(image: UIImage?, with color: UIColor) -> UIImage? {
-        guard let image = image else {
-            return nil
-        }
-        UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.main.scale)
-        
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return nil
-        }
-        color.setFill()
-        
-        context.translateBy(x: 0, y: image.size.height)
-        context.scaleBy(x: 1.0, y: -1.0)
-        
-        context.setBlendMode(CGBlendMode.colorBurn)
-        let rect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        context.draw(image.cgImage!, in: rect)
-        
-        context.setBlendMode(CGBlendMode.sourceIn)
-        context.addRect(rect)
-        context.drawPath(using: CGPathDrawingMode.fill)
-        
-        let coloredImg : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        
-        return coloredImg
-    }
+    
 }
 
 extension MGSelectorViewController: UITableViewDataSource {
@@ -181,3 +173,31 @@ extension MGSelectorViewController: UITableViewDelegate {
     
 }
 
+fileprivate extension UIImage {
+    
+    func fill(with color: UIColor) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+        
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        color.setFill()
+        
+        context.translateBy(x: 0, y: size.height)
+        context.scaleBy(x: 1.0, y: -1.0)
+        
+        context.setBlendMode(CGBlendMode.colorBurn)
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        context.draw(cgImage!, in: rect)
+        
+        context.setBlendMode(CGBlendMode.sourceIn)
+        context.addRect(rect)
+        context.drawPath(using: CGPathDrawingMode.fill)
+        
+        let coloredImg : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return coloredImg
+    }
+    
+}

@@ -8,20 +8,9 @@
 
 import UIKit
 
-fileprivate struct HeaderKeys {
-    var key: String
-}
-
-extension HeaderKeys: MGSelectorOption {
-    
-    var title: String {
-        return key
-    }
-    
-    var detail: String? {
-        return NSLocalizedString(key, comment: "")
-    }
-    
+fileprivate struct HeaderKeys: MGSelectorOption {
+    var title: String
+    var detail: String?
 }
 
 fileprivate struct Const {
@@ -32,8 +21,6 @@ fileprivate struct Const {
                              "If-None-Match", "If-Range", "If-Unmodified-Since", "Max-Forwards",
                              "Origin", "Pragma", "Proxy-Authorization", "Range", "Referer",
                              "User-Agent", "Upgrade", "Via", "Warning"]
-    
-    static let headerKeys = keys.map { HeaderKeys(key: $0) }
 }
 
 class ViewController: UIViewController {
@@ -54,9 +41,9 @@ class ViewController: UIViewController {
     @IBAction func open(_ sender: UIButton) {
         switch sender {
         case lightButton:
-            openSelector(title: "Header Keys", options: Const.headerKeys)
+            openSelector(title: "Header Keys", options: Const.keys.map { HeaderKeys(title: $0, detail: nil) })
         case darkButton:
-            openSelector(title: "Header Keys", options: Const.headerKeys, theme: .dark)
+            openSelector(title: "Header Keys", options: Const.keys.map { HeaderKeys(title: $0, detail: NSLocalizedString($0, comment: "")) }, theme: .dark)
         default:
             break
         }

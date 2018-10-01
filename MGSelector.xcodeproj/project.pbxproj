@@ -20,6 +20,7 @@
 		77DE0C072161DE37008B2C37 /* MGSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DE0C062161DE37008B2C37 /* MGSelectTableViewCell.swift */; };
 		77DE0C092161E547008B2C37 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77DE0C082161E547008B2C37 /* Localizable.strings */; };
 		E40B6163216259C5003AA6C5 /* MGSelectorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B6162216259C5003AA6C5 /* MGSelectorTheme.swift */; };
+		E40B616521626BF3003AA6C5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E40B616421626BF3003AA6C5 /* Images.xcassets */; };
 		FE39BB2182F2102AD88DD577 /* Pods_MGSelector_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E166ACC9D67EF4BE18EE7BC4 /* Pods_MGSelector_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		C9C8BFD05F8C328B860E22C2 /* Pods-MGSelector_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSelector_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MGSelector_Example/Pods-MGSelector_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E166ACC9D67EF4BE18EE7BC4 /* Pods_MGSelector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MGSelector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40B6162216259C5003AA6C5 /* MGSelectorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGSelectorTheme.swift; sourceTree = "<group>"; };
+		E40B616421626BF3003AA6C5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E40B616421626BF3003AA6C5 /* Images.xcassets */,
 				77DE0C082161E547008B2C37 /* Localizable.strings */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
@@ -171,6 +174,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 6ANM44X2CJ;
 						LastSwiftMigration = 0900;
 					};
 				};
@@ -199,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				E40B616521626BF3003AA6C5 /* Images.xcassets in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				77DE0BFE2161DA1A008B2C37 /* README.md in Resources */,
 				77DE0C092161E547008B2C37 /* Localizable.strings in Resources */,
@@ -389,6 +394,7 @@
 			baseConfigurationReference = A4B9798DB64E9EC5C61B35BF /* Pods-MGSelector_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6ANM44X2CJ;
 				INFOPLIST_FILE = MGSelector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -404,6 +410,7 @@
 			baseConfigurationReference = C9C8BFD05F8C328B860E22C2 /* Pods-MGSelector_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6ANM44X2CJ;
 				INFOPLIST_FILE = MGSelector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;

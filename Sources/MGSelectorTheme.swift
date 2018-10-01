@@ -9,12 +9,12 @@
 import UIKit
 
 public struct MGSelectorTheme {
-    
+    var maskColor: UIColor
     var backgroundColor: UIColor
     var mainColor: UIColor
     var secondaryColor: UIColor
     
-    public static let light = MGSelectorTheme(backgroundColor: .white, mainColor: .black, secondaryColor: .darkGray)
-    public static let dark = MGSelectorTheme(backgroundColor: .darkGray, mainColor: .white, secondaryColor: .lightGray)
+    public static let light = MGSelectorTheme(maskColor: UIColor(white: 0, alpha: 0.7), backgroundColor: .white, mainColor: .black, secondaryColor: .darkGray)
+    public static let dark = MGSelectorTheme(maskColor: UIColor(white: 0, alpha: 0.5),backgroundColor: .darkGray, mainColor: .white, secondaryColor: .lightGray)
     
 }
