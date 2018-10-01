@@ -38,7 +38,8 @@ fileprivate struct Const {
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var lightButton: UIButton!
+    @IBOutlet weak var darkButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +51,15 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func open(_ sender: Any) {
-        openSelector(title: "Header Keys", options: Const.headerKeys)
+    @IBAction func open(_ sender: UIButton) {
+        switch sender {
+        case lightButton:
+            openSelector(title: "Header Keys", options: Const.headerKeys)
+        case darkButton:
+            openSelector(title: "Header Keys", options: Const.headerKeys, theme: .dark)
+        default:
+            break
+        }
     }
     
 }
@@ -59,7 +67,7 @@ class ViewController: UIViewController {
 extension ViewController: MGSelectable {
     
     func didSelect(option: MGSelectorOption) {
-        button.setTitle(option.title, for: .normal)
+        title = option.title
     }
     
 }

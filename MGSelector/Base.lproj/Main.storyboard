@@ -23,22 +23,33 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzc-es-wHm">
                                 <rect key="frame" x="16" y="80" width="343" height="30"/>
-                                <state key="normal" title="Open Selector"/>
+                                <state key="normal" title="Light Selector"/>
                                 <connections>
                                     <action selector="open:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cMR-XV-sZT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwS-3P-b7u">
+                                <rect key="frame" x="16" y="118" width="343" height="30"/>
+                                <state key="normal" title="Dark Selector"/>
+                                <connections>
+                                    <action selector="open:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="jko-lM-Rr8"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="hzc-es-wHm" secondAttribute="trailing" constant="16" id="5pQ-pY-cjE"/>
+                            <constraint firstAttribute="trailing" secondItem="OwS-3P-b7u" secondAttribute="trailing" constant="16" id="IH5-xY-8Ki"/>
+                            <constraint firstItem="OwS-3P-b7u" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="NWN-gN-2uz"/>
                             <constraint firstItem="hzc-es-wHm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="PYh-WM-06e"/>
+                            <constraint firstItem="OwS-3P-b7u" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="54" id="WwP-DC-MEG"/>
                             <constraint firstItem="hzc-es-wHm" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="16" id="XRu-zB-FoM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="MGSelector" id="tKD-XT-vS9"/>
                     <connections>
-                        <outlet property="button" destination="hzc-es-wHm" id="085-ap-t0P"/>
+                        <outlet property="darkButton" destination="OwS-3P-b7u" id="TkG-C0-Sb2"/>
+                        <outlet property="lightButton" destination="hzc-es-wHm" id="Fx5-XG-ZbJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

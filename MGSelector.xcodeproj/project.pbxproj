@@ -19,6 +19,8 @@
 		77DE0C052161DA50008B2C37 /* MGSelectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DE0C022161DA50008B2C37 /* MGSelectable.swift */; };
 		77DE0C072161DE37008B2C37 /* MGSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DE0C062161DE37008B2C37 /* MGSelectTableViewCell.swift */; };
 		77DE0C092161E547008B2C37 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77DE0C082161E547008B2C37 /* Localizable.strings */; };
+		E40B6163216259C5003AA6C5 /* MGSelectorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B6162216259C5003AA6C5 /* MGSelectorTheme.swift */; };
+		FE39BB2182F2102AD88DD577 /* Pods_MGSelector_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E166ACC9D67EF4BE18EE7BC4 /* Pods_MGSelector_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		77DE0C082161E547008B2C37 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A4B9798DB64E9EC5C61B35BF /* Pods-MGSelector_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSelector_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MGSelector_Example/Pods-MGSelector_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C9C8BFD05F8C328B860E22C2 /* Pods-MGSelector_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSelector_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MGSelector_Example/Pods-MGSelector_Example.release.xcconfig"; sourceTree = "<group>"; };
+		E166ACC9D67EF4BE18EE7BC4 /* Pods_MGSelector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MGSelector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E40B6162216259C5003AA6C5 /* MGSelectorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGSelectorTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE39BB2182F2102AD88DD577 /* Pods_MGSelector_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +59,7 @@
 		2DF2C008156CCDBCB285C346 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E166ACC9D67EF4BE18EE7BC4 /* Pods_MGSelector_Example.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,6 +122,7 @@
 				77DE0C002161DA50008B2C37 /* Images.xcassets */,
 				77DE0C022161DA50008B2C37 /* MGSelectable.swift */,
 				77DE0C012161DA50008B2C37 /* MGSelector.swift */,
+				E40B6162216259C5003AA6C5 /* MGSelectorTheme.swift */,
 				77DE0C062161DE37008B2C37 /* MGSelectTableViewCell.swift */,
 			);
 			path = Sources;
@@ -247,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E40B6163216259C5003AA6C5 /* MGSelectorTheme.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				77DE0C072161DE37008B2C37 /* MGSelectTableViewCell.swift in Sources */,
 				77DE0C052161DA50008B2C37 /* MGSelectable.swift in Sources */,

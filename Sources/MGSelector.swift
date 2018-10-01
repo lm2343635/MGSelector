@@ -6,6 +6,10 @@ fileprivate struct Const {
     static let selectorCell = "selectorCell"
     static let margin = 16
     
+    struct title {
+        static let margin = 25
+    }
+    
     struct close {
         static let size = 30
     }
@@ -16,12 +20,13 @@ class MGSelectorViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
+        label.textColor = theme.mainColor
         return label
     }()
     
     private lazy var closeButton: UIButton = {
         let button = UIButton()
-        button.setImage(fill(image: UIImage(named: "close"), with: .darkGray), for: .normal)
+        button.setImage(fill(image: UIImage(named: "close"), with: theme.mainColor), for: .normal)
         button.addTarget(self, action: #selector(close), for: .touchUpInside)
         return button
     }()
@@ -40,16 +45,18 @@ class MGSelectorViewController: UIViewController {
     
     private lazy var backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = theme.backgroundColor
         return view
     }()
     
+    private let theme: MGSelectorTheme
     private let options: [MGSelectorOption]
     
     weak var delegate: MGSelectable?
     
-    init(title: String, options: [MGSelectorOption]) {
+    init(title: String, options: [MGSelectorOption], theme: MGSelectorTheme = .light) {
         self.options = options
+        self.theme = theme
         super.init(nibName: nil, bundle: nil)
         
         modalTransitionStyle = .crossDissolve
@@ -81,9 +88,9 @@ class MGSelectorViewController: UIViewController {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.bottom.equalTo(tableView.snp.top).offset(-Const.margin)
+            $0.bottom.equalTo(tableView.snp.top).offset(-Const.title.margin)
             $0.left.equalToSuperview().offset(Const.margin)
-            $0.right.equalTo(closeButton.snp.left).offset(-Const.margin)
+            $0.right.equalTo(closeButton.snp.left).offset(-Const.title.margin)
         }
 
         closeButton.snp.makeConstraints {
@@ -158,6 +165,7 @@ extension MGSelectorViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Const.selectorCell, for: indexPath) as? MGSelectTableViewCell else {
             return UITableViewCell()
         }
+        cell.theme = theme
         cell.option = options[indexPath.row]
         return cell
     }

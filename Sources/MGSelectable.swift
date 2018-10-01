@@ -18,8 +18,8 @@ public protocol MGSelectable: class {
 
 public extension MGSelectable where Self: UIViewController {
     
-    public func openSelector(title: String, options: [MGSelectorOption]) {
-        let selector = MGSelectorViewController(title: title, options: options)
+    public func openSelector(title: String, options: [MGSelectorOption], theme: MGSelectorTheme = .light) {
+        let selector = MGSelectorViewController(title: title, options: options, theme: theme)
         selector.delegate = self
         present(selector, animated: true)
     }
