@@ -6,6 +6,13 @@
 [![License](https://img.shields.io/cocoapods/l/MGSelector.svg?style=flat)](https://cocoapods.org/pods/MGSelector)
 [![Platform](https://img.shields.io/cocoapods/p/MGSelector.svg?style=flat)](https://cocoapods.org/pods/MGSelector)
 
+MGSelector is a customised table selector for iOS.
+
+<div>
+<img src="https://github.com/lm2343635/MGSelector/raw/master/screenshoot/light.png" width="300">
+<img src="https://github.com/lm2343635/MGSelector/raw/master/screenshoot/dark.png" width="300">
+</div>
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
@@ -29,6 +36,7 @@ struct Option: MGSelectorOption {
 }
 ```
 Confirm the MGSelectable protocol in your view controller, and invokes the `openSelector` method.
+
 ```Swift
 let options: [Options] = ...
 
@@ -38,8 +46,14 @@ class ViewController: UIViewController, MGSelectable {
     @IBAction func open(_ sender: UIButton) {
         openSelector(title: "Title", options: options, theme: .dark)
     }
+    
+    func didSelect(option: MGSelectorOption) {
+        title = option.title
+    }
 }
 ```
+
+Get the select result using the `didSelect` protocol method.
 
 ## Author
 
