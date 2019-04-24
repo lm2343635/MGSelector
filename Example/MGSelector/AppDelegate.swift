@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  MGSelector
 //
-//  Created by lm2343635 on 10/01/2018.
-//  Copyright (c) 2018 lm2343635. All rights reserved.
+//  Created by Meng Li on 10/01/2018.
+//  Copyright (c) 2018 MuShare. All rights reserved.
 //
 
 import UIKit

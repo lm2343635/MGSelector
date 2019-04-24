@@ -3,8 +3,8 @@
 //  MGSelector
 //
 //  Created by Meng Li on 2018/09/21.
+//  Copyright © 2018 MuShare. All rights reserved.
 //
-
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
@@ -34,11 +34,12 @@ public protocol MGSelectable: class {
     func didSelect(option: MGSelectorOption)
 }
 
-public extension MGSelectable where Self: UIViewController {
+extension MGSelectable where Self: UIViewController {
     
     public func openSelector(title: String, options: [MGSelectorOption], theme: MGSelectorTheme = .light) {
         let selector = MGSelectorViewController(title: title, options: options, theme: theme)
         selector.delegate = self
         present(selector, animated: true)
     }
+
 }

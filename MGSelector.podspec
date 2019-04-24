@@ -28,8 +28,8 @@ MGSelector is a customized table selector for iOS.
   s.source           = { :git => 'https://github.com/lm2343635/MGSelector.git', :tag => s.version.to_s }
   s.social_media_url = 'https://www.fczm.pw'
 
-  s.ios.deployment_target = '8.2'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'MGSelector/Classes/**/*'
-  s.dependency 'SnapKit', '~> 4'
+  s.dependency 'SnapKit', '~> 5'
 end
