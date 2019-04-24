@@ -173,6 +173,7 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
+				77E4D78E226FF92200ED1DBC /* Rebuild Pods */,
 				433B381EC779D55434B8887A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -320,6 +321,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MGSelector_Example/Pods-MGSelector_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		77E4D78E226FF92200ED1DBC /* Rebuild Pods */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Rebuild Pods";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find \"${SRCROOT}/Pods\" -type f -name *frameworks.sh -exec bash -c \"touch \\\"{}\\\"\" \\;\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

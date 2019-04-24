@@ -112,6 +112,7 @@ class MGSelectorViewController: UIViewController {
     }
     
     private func createConstraints() {
+        
         tableView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(Const.margin)
             $0.right.equalToSuperview().offset(-Const.margin)
@@ -138,6 +139,7 @@ class MGSelectorViewController: UIViewController {
             $0.top.equalToSuperview()
             $0.bottom.equalTo(backgroundView.snp.top)
         }
+        
     }
     
     private func setCorner() {
