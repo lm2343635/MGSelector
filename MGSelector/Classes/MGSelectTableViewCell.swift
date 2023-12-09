@@ -60,9 +60,8 @@ class MGSelectTableViewCell: UITableViewCell {
     
     private func createConstraints() {
         titleLabel.snp.makeConstraints {
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
-            $0.top.equalToSuperview()
+            $0.edges.equalToSuperview()
+            $0.height.equalTo(50)
         }
     }
     
@@ -73,14 +72,14 @@ class MGSelectTableViewCell: UITableViewCell {
         }
     }
     
-    var option: MGSelectorOption? {
+    var item: MGSelectorItem? {
         didSet {
-            guard let option = option else {
+            guard let item = item else {
                 return
             }
-            titleLabel.text = option.title
-            
-            if let detail = option.detail {
+            accessoryType = item.selected ? .checkmark : .none
+            titleLabel.text = item.option.title
+            if let detail = item.option.detail {
                 detailTextView.text = detail
                 detailTextView.snp.makeConstraints {
                     $0.left.equalToSuperview()

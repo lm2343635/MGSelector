@@ -47,6 +47,7 @@ class MGSelectorViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(MGSelectTableViewCell.self, forCellReuseIdentifier: Const.selectorCell)
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .clear
@@ -73,12 +74,19 @@ class MGSelectorViewController: UIViewController {
     private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
     
     private let theme: MGSelectorTheme
-    private let options: [MGSelectorOption]
+    private let items: [MGSelectorItem]
     
     weak var delegate: MGSelectable?
     
-    init(title: String, options: [MGSelectorOption], theme: MGSelectorTheme = .light) {
-        self.options = options
+    init(
+        title: String,
+        options: [MGSelectorOption],
+        selectedIndex: Int = 0,
+        theme: MGSelectorTheme = .light
+    ) {
+        self.items = options.enumerated().map {
+            MGSelectorItem(option: $0.element, selected: $0.offset == selectedIndex)
+        }
         self.theme = theme
         super.init(nibName: nil, bundle: nil)
         
@@ -173,7 +181,7 @@ class MGSelectorViewController: UIViewController {
 extension MGSelectorViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return options.count
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -185,7 +193,7 @@ extension MGSelectorViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.theme = theme
-        cell.option = options[indexPath.row]
+        cell.item = items[indexPath.row]
         return cell
     }
     
@@ -194,7 +202,7 @@ extension MGSelectorViewController: UITableViewDataSource {
 extension MGSelectorViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelect(option: options[indexPath.row])
+        delegate?.didSelect(option: items[indexPath.row].option)
         dismiss(animated: true)
     }
     

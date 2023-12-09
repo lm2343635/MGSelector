@@ -42,9 +42,18 @@ class ViewController: UIViewController {
     @IBAction func open(_ sender: UIButton) {
         switch sender {
         case lightButton:
-            openSelector(title: "Header Keys", options: Const.keys.map { HeaderKeys(title: $0, detail: nil) })
+            openSelector(
+                title: "Header Keys",
+                options: Const.keys.map { HeaderKeys(title: $0, detail: nil) },
+                selectedIndex: Const.keys.firstIndex(of: title ?? "") ?? 0
+            )
         case darkButton:
-            openSelector(title: "Header Keys", options: Const.keys.map { HeaderKeys(title: $0, detail: NSLocalizedString($0, comment: "")) }, theme: .dark)
+            openSelector(
+                title: "Header Keys",
+                options: Const.keys.map { HeaderKeys(title: $0, detail: NSLocalizedString($0, comment: "")) },
+                selectedIndex: Const.keys.firstIndex(of: title ?? "") ?? 0,
+                theme: .dark
+            )
         default:
             break
         }

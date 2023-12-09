@@ -30,16 +30,26 @@ public protocol MGSelectorOption {
     var detail: String? { get }
 }
 
-public protocol MGSelectable: class {
+public protocol MGSelectable: AnyObject {
     func didSelect(option: MGSelectorOption)
 }
 
 extension MGSelectable where Self: UIViewController {
     
-    public func openSelector(title: String, options: [MGSelectorOption], theme: MGSelectorTheme = .light) {
-        let selector = MGSelectorViewController(title: title, options: options, theme: theme)
+    public func openSelector(
+        title: String,
+        options: [MGSelectorOption],
+        selectedIndex: Int = 0,
+        theme: MGSelectorTheme = .light
+    ) {
+        let selector = MGSelectorViewController(title: title, options: options, selectedIndex: selectedIndex, theme: theme)
         selector.delegate = self
         present(selector, animated: true)
     }
 
+}
+
+struct MGSelectorItem {
+    let option: MGSelectorOption
+    let selected: Bool
 }
