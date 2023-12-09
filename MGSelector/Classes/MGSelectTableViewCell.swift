@@ -51,18 +51,10 @@ class MGSelectTableViewCell: UITableViewCell {
         
         addSubview(titleLabel)
         addSubview(detailTextView)
-        createConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func createConstraints() {
-        titleLabel.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.height.equalTo(50)
-        }
     }
     
     var theme: MGSelectorTheme = .light {
@@ -86,6 +78,17 @@ class MGSelectTableViewCell: UITableViewCell {
                     $0.right.equalToSuperview()
                     $0.top.equalTo(titleLabel.snp.bottom)
                     $0.bottom.equalToSuperview()
+                }
+                
+                titleLabel.snp.makeConstraints {
+                    $0.left.equalToSuperview()
+                    $0.right.equalToSuperview()
+                    $0.top.equalToSuperview()
+                }
+            } else {
+                titleLabel.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                    $0.height.equalTo(50)
                 }
             }
         }

@@ -33,6 +33,11 @@ fileprivate struct Const {
     struct title {
         static let margin = 25
     }
+    
+    struct close {
+        static let margin = 25
+        static let size = 30
+    }
 }
 
 class MGSelectorViewController: UIViewController {
@@ -42,6 +47,14 @@ class MGSelectorViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         label.textColor = theme.mainColor
         return label
+    }()
+    
+    private lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = theme.mainColor
+        button.addTarget(nil, action: #selector(close), for: .touchUpInside)
+        return button
     }()
     
     private lazy var tableView: UITableView = {
@@ -74,7 +87,7 @@ class MGSelectorViewController: UIViewController {
     private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
     
     private let theme: MGSelectorTheme
-    private let items: [MGSelectorItem]
+    private var items: [MGSelectorItem]
     
     weak var delegate: MGSelectable?
     
@@ -110,6 +123,7 @@ class MGSelectorViewController: UIViewController {
         view.addSubview(tapView)
         view.addSubview(backgroundView)
         view.addSubview(titleLabel)
+        view.addSubview(closeButton)
         view.addSubview(tableView)
         createConstraints()
     }
@@ -132,6 +146,12 @@ class MGSelectorViewController: UIViewController {
             $0.bottom.equalTo(tableView.snp.top).offset(-Const.title.margin)
             $0.left.equalToSuperview().offset(Const.margin)
             $0.right.equalToSuperview().offset(-Const.title.margin)
+        }
+        
+        closeButton.snp.makeConstraints {
+            $0.size.equalTo(Const.close.size)
+            $0.centerY.equalTo(titleLabel)
+            $0.right.equalToSuperview().offset(-Const.margin)
         }
         
         backgroundView.snp.makeConstraints {
@@ -167,10 +187,8 @@ class MGSelectorViewController: UIViewController {
     
     private var bottomPadding: CGFloat {
         var bottom: CGFloat = 0
-        if #available(iOS 11.0, *) {
-            if let window = UIApplication.shared.keyWindow {
-                bottom += window.safeAreaInsets.bottom
-            }
+        if let window = UIApplication.shared.keyWindow {
+            bottom += window.safeAreaInsets.bottom
         }
         return bottom
     }
@@ -202,8 +220,11 @@ extension MGSelectorViewController: UITableViewDataSource {
 extension MGSelectorViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        items = items.enumerated().map {
+            MGSelectorItem(option: $0.element.option, selected: $0.offset == indexPath.row)
+        }
+        tableView.reloadData()
         delegate?.didSelect(option: items[indexPath.row].option)
-        dismiss(animated: true)
     }
     
 }
