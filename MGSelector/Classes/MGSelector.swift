@@ -79,7 +79,7 @@ class MGSelectorViewController: UIViewController {
     weak var delegate: MGSelectable?
     
     init(
-        title: String,
+        title: String?,
         options: [MGSelectorOption],
         selectedIndex: Int = 0,
         theme: MGSelectorTheme = .light

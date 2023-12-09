@@ -37,12 +37,17 @@ public protocol MGSelectable: AnyObject {
 extension MGSelectable where Self: UIViewController {
     
     public func openSelector(
-        title: String,
+        title: String?,
         options: [MGSelectorOption],
         selectedIndex: Int = 0,
         theme: MGSelectorTheme = .light
     ) {
-        let selector = MGSelectorViewController(title: title, options: options, selectedIndex: selectedIndex, theme: theme)
+        let selector = MGSelectorViewController(
+            title: title,
+            options: options,
+            selectedIndex: selectedIndex,
+            theme: theme
+        )
         selector.delegate = self
         present(selector, animated: true)
     }
