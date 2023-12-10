@@ -28,7 +28,7 @@ import SnapKit
 
 fileprivate struct Const {
     static let selectorCell = "selectorCell"
-    static let margin = 16
+    static let margin = 20
     
     struct title {
         static let margin = 25
@@ -41,7 +41,7 @@ fileprivate struct Const {
 }
 
 class MGSelectorViewController: UIViewController {
-    
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
@@ -139,7 +139,7 @@ class MGSelectorViewController: UIViewController {
             $0.left.equalToSuperview().offset(Const.margin)
             $0.right.equalToSuperview().offset(-Const.margin)
             $0.bottom.equalToSuperview().offset(-bottomPadding)
-            $0.height.equalTo(tableView.snp.width)
+            $0.height.equalTo(UIScreen.main.bounds.height / 3)
         }
         
         titleLabel.snp.makeConstraints {
@@ -171,9 +171,11 @@ class MGSelectorViewController: UIViewController {
     }
     
     private func setCorner() {
-        let path = UIBezierPath(roundedRect: backgroundView.bounds,
-                                byRoundingCorners: [.topRight, .topLeft],
-                                cornerRadii: CGSize(width: 10, height:  10))
+        let path = UIBezierPath(
+            roundedRect: backgroundView.bounds,
+            byRoundingCorners: [.topRight, .topLeft],
+            cornerRadii: CGSize(width: 10, height:  10)
+        )
         let maskLayer = CAShapeLayer()
         maskLayer.frame = backgroundView.bounds
         maskLayer.path = path.cgPath

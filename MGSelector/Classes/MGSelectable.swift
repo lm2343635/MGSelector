@@ -26,6 +26,7 @@
 import UIKit
 
 public protocol MGSelectorOption {
+    var icon: UIImage? { get }
     var title: String { get }
     var detail: String? { get }
 }

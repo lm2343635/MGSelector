@@ -27,6 +27,8 @@ import UIKit
 
 class MGSelectTableViewCell: UITableViewCell {
     
+    private lazy var iconImageView = UIImageView()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
@@ -49,8 +51,14 @@ class MGSelectTableViewCell: UITableViewCell {
         selectionStyle = .none
         backgroundColor = .clear
         
-        addSubview(titleLabel)
-        addSubview(detailTextView)
+        contentView.addSubview(iconImageView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(detailTextView)
+        
+        iconImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(26)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -70,6 +78,7 @@ class MGSelectTableViewCell: UITableViewCell {
                 return
             }
             accessoryType = item.selected ? .checkmark : .none
+            iconImageView.image = item.option.icon
             titleLabel.text = item.option.title
             if let detail = item.option.detail {
                 detailTextView.text = detail
@@ -81,13 +90,14 @@ class MGSelectTableViewCell: UITableViewCell {
                 }
                 
                 titleLabel.snp.makeConstraints {
-                    $0.left.equalToSuperview()
+                    $0.left.equalToSuperview().offset(item.option.icon == nil ? 0 : 40)
                     $0.right.equalToSuperview()
                     $0.top.equalToSuperview()
                 }
             } else {
                 titleLabel.snp.makeConstraints {
-                    $0.edges.equalToSuperview()
+                    $0.left.equalToSuperview().offset(item.option.icon == nil ? 0 : 40)
+                    $0.top.right.bottom.equalToSuperview()
                     $0.height.equalTo(50)
                 }
             }
