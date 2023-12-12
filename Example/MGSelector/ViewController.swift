@@ -10,7 +10,9 @@ import UIKit
 import MGSelector
 
 fileprivate struct HeaderKeys: MGSelectorOption {
+    var icon: UIImage? = UIImage(systemName: "figure")
     var title: String
+    var tag: String?
     var detail: String?
 }
 
@@ -44,7 +46,7 @@ class ViewController: UIViewController {
         case lightButton:
             openSelector(
                 title: "Header Keys",
-                options: Const.keys.map { HeaderKeys(title: $0, detail: nil) },
+                options: Const.keys.map { HeaderKeys(title: $0, tag: "VIP", detail: nil) },
                 selectedIndex: Const.keys.firstIndex(of: title ?? "") ?? 0
             )
         case darkButton:
@@ -52,7 +54,7 @@ class ViewController: UIViewController {
                 title: "Header Keys",
                 options: Const.keys.map { HeaderKeys(title: $0, detail: NSLocalizedString($0, comment: "")) },
                 selectedIndex: Const.keys.firstIndex(of: title ?? "") ?? 0,
-                theme: .dark
+                theme: .dark()
             )
         default:
             break

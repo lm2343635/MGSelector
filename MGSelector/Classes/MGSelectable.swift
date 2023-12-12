@@ -28,6 +28,7 @@ import UIKit
 public protocol MGSelectorOption {
     var icon: UIImage? { get }
     var title: String { get }
+    var tag: String? { get }
     var detail: String? { get }
 }
 
@@ -41,7 +42,7 @@ extension MGSelectable where Self: UIViewController {
         title: String?,
         options: [MGSelectorOption],
         selectedIndex: Int = 0,
-        theme: MGSelectorTheme = .light
+        theme: MGSelectorTheme = .light()
     ) {
         let selector = MGSelectorViewController(
             title: title,

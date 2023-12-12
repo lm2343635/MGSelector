@@ -95,7 +95,7 @@ class MGSelectorViewController: UIViewController {
         title: String?,
         options: [MGSelectorOption],
         selectedIndex: Int = 0,
-        theme: MGSelectorTheme = .light
+        theme: MGSelectorTheme = .light()
     ) {
         self.items = options.enumerated().map {
             MGSelectorItem(option: $0.element, selected: $0.offset == selectedIndex)

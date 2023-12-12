@@ -30,8 +30,29 @@ public struct MGSelectorTheme {
     var backgroundColor: UIColor
     var mainColor: UIColor
     var secondaryColor: UIColor
+    var tagTextColor: UIColor
+    var tagBackgroundColor: UIColor
     
-    public static let light = MGSelectorTheme(maskColor: UIColor(white: 0, alpha: 0.7), backgroundColor: .white, mainColor: .black, secondaryColor: .darkGray)
-    public static let dark = MGSelectorTheme(maskColor: UIColor(white: 0, alpha: 0.5),backgroundColor: .darkGray, mainColor: .white, secondaryColor: .lightGray)
+    public static func light(tagBackgroundColor: UIColor = .darkGray) -> MGSelectorTheme {
+        return MGSelectorTheme(
+            maskColor: UIColor(white: 0, alpha: 0.7),
+            backgroundColor: .white,
+            mainColor: .black,
+            secondaryColor: .darkGray,
+            tagTextColor: .white,
+            tagBackgroundColor: tagBackgroundColor
+        )
+    }
+    
+    public static func dark(tagBackgroundColor: UIColor = .lightGray) -> MGSelectorTheme {
+        return MGSelectorTheme(
+            maskColor: UIColor(white: 0, alpha: 0.5),
+            backgroundColor: .darkGray,
+            mainColor: .white,
+            secondaryColor: .lightGray,
+            tagTextColor: .white,
+            tagBackgroundColor: tagBackgroundColor
+        )
+    }
     
 }

@@ -25,6 +25,24 @@
 
 import UIKit
 
+class TagLabel: UILabel {
+
+    var textInsets: UIEdgeInsets = .zero
+
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: rect.inset(by: textInsets))
+    }
+
+    override var intrinsicContentSize: CGSize {
+        let originalSize = super.intrinsicContentSize
+        return CGSize(
+            width: originalSize.width + textInsets.left + textInsets.right,
+            height: originalSize.height + textInsets.top + textInsets.bottom
+        )
+    }
+}
+
+
 class MGSelectTableViewCell: UITableViewCell {
     
     private lazy var iconImageView = UIImageView()
@@ -32,6 +50,15 @@ class MGSelectTableViewCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
+        return label
+    }()
+    
+    private lazy var tagLabel: UILabel = {
+        let label = TagLabel()
+        label.textInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.layer.cornerRadius = 10
+        label.layer.masksToBounds = true
         return label
     }()
     
@@ -53,11 +80,18 @@ class MGSelectTableViewCell: UITableViewCell {
         
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(tagLabel)
         contentView.addSubview(detailTextView)
         
         iconImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.size.equalTo(26)
+        }
+        
+        tagLabel.snp.makeConstraints {
+            $0.right.lessThanOrEqualToSuperview()
+            $0.centerY.equalTo(titleLabel)
+            $0.height.equalTo(20)
         }
     }
     
@@ -65,10 +99,12 @@ class MGSelectTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var theme: MGSelectorTheme = .light {
+    var theme: MGSelectorTheme = .light() {
         didSet {
             titleLabel.textColor = theme.mainColor
             detailTextView.textColor = theme.secondaryColor
+            tagLabel.textColor = theme.tagTextColor
+            tagLabel.backgroundColor = theme.tagBackgroundColor
         }
     }
     
@@ -80,10 +116,12 @@ class MGSelectTableViewCell: UITableViewCell {
             accessoryType = item.selected ? .checkmark : .none
             iconImageView.image = item.option.icon
             titleLabel.text = item.option.title
+            tagLabel.text = item.option.tag
+            tagLabel.isHidden = item.option.tag == nil
             if let detail = item.option.detail {
                 detailTextView.text = detail
                 detailTextView.snp.makeConstraints {
-                    $0.left.equalToSuperview()
+                    $0.left.equalTo(titleLabel)
                     $0.right.equalToSuperview()
                     $0.top.equalTo(titleLabel.snp.bottom)
                     $0.bottom.equalToSuperview()
@@ -91,13 +129,14 @@ class MGSelectTableViewCell: UITableViewCell {
                 
                 titleLabel.snp.makeConstraints {
                     $0.left.equalToSuperview().offset(item.option.icon == nil ? 0 : 40)
-                    $0.right.equalToSuperview()
+                    $0.right.equalTo(tagLabel.snp.left).offset(-10)
                     $0.top.equalToSuperview()
                 }
             } else {
                 titleLabel.snp.makeConstraints {
                     $0.left.equalToSuperview().offset(item.option.icon == nil ? 0 : 40)
-                    $0.top.right.bottom.equalToSuperview()
+                    $0.top.bottom.equalToSuperview()
+                    $0.right.equalTo(tagLabel.snp.left).offset(-10)
                     $0.height.equalTo(50)
                 }
             }

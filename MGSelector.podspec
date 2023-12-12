@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MGSelector'
-  s.version          = '0.3'
+  s.version          = '0.3.1'
   s.summary          = 'A customized table selector for iOS.'
 
 # This description is used to generate tags and improve search results.
@@ -29,6 +29,7 @@ MGSelector is a customized table selector for iOS.
   s.social_media_url = 'https://www.fczm.pw'
 
   s.ios.deployment_target = '13.0'
+  s.swift_versions = '5.1'
 
   s.source_files = 'MGSelector/Classes/**/*'
   s.dependency 'SnapKit', '~> 5'
