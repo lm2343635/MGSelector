@@ -189,9 +189,12 @@ class MGSelectorViewController: UIViewController {
     
     private var bottomPadding: CGFloat {
         var bottom: CGFloat = 0
-        if let window = UIApplication.shared.keyWindow {
-            bottom += window.safeAreaInsets.bottom
-        }
+        let keyWindow = UIApplication
+            .shared
+            .connectedScenes
+            .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+            .last { $0.isKeyWindow }
+        bottom += keyWindow?.safeAreaInsets.bottom ?? 0
         return bottom
     }
     
