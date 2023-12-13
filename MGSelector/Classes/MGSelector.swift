@@ -88,19 +88,29 @@ class MGSelectorViewController: UIViewController {
     
     private let theme: MGSelectorTheme
     private var items: [MGSelectorItem]
+    private let mode: MGSelectorMode
     
     weak var delegate: MGSelectable?
     
     init(
         title: String?,
         options: [MGSelectorOption],
-        selectedIndex: Int = 0,
-        theme: MGSelectorTheme = .light()
+        mode: MGSelectorMode,
+        theme: MGSelectorTheme
     ) {
-        self.items = options.enumerated().map {
-            MGSelectorItem(option: $0.element, selected: $0.offset == selectedIndex)
-        }
         self.theme = theme
+        self.mode = mode
+        switch mode {
+        case .single(let selectedIndex):
+            self.items = options.enumerated().map {
+                MGSelectorItem(option: $0.element, selected: $0.offset == selectedIndex)
+            }
+        case .multiple(let selectedIndexes):
+            self.items = options.enumerated().map {
+                MGSelectorItem(option: $0.element, selected: selectedIndexes.contains($0.offset))
+            }
+        }
+        
         super.init(nibName: nil, bundle: nil)
         
         modalTransitionStyle = .crossDissolve
@@ -225,11 +235,21 @@ extension MGSelectorViewController: UITableViewDataSource {
 extension MGSelectorViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        items = items.enumerated().map {
-            MGSelectorItem(option: $0.element.option, selected: $0.offset == indexPath.row)
+        switch mode {
+        case .single:
+            items = items.enumerated().map {
+                MGSelectorItem(option: $0.element.option, selected: $0.offset == indexPath.row)
+            }
+        case .multiple:
+            items = items.enumerated().map {
+                MGSelectorItem(
+                    option: $0.element.option,
+                    selected: $0.offset == indexPath.row ? !$0.element.selected : $0.element.selected
+                )
+            }
         }
+        delegate?.didSelect(options: items.filter { $0.selected }.map { $0.option })
         tableView.reloadData()
-        delegate?.didSelect(option: items[indexPath.row].option)
     }
     
 }

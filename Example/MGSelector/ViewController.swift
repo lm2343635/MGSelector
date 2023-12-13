@@ -47,13 +47,13 @@ class ViewController: UIViewController {
             openSelector(
                 title: "Header Keys",
                 options: Const.keys.map { HeaderKeys(title: $0, tag: "VIP", detail: nil) },
-                selectedIndex: Const.keys.firstIndex(of: title ?? "") ?? 0
+                mode: .single(selectedIndex: Const.keys.firstIndex(of: title ?? "") ?? 0)
             )
         case darkButton:
             openSelector(
                 title: "Header Keys",
                 options: Const.keys.map { HeaderKeys(title: $0, detail: NSLocalizedString($0, comment: "")) },
-                selectedIndex: Const.keys.firstIndex(of: title ?? "") ?? 0,
+                mode: .multiple(selectedIndexes: [0, 1]),
                 theme: .dark()
             )
         default:
@@ -65,8 +65,8 @@ class ViewController: UIViewController {
 
 extension ViewController: MGSelectable {
     
-    func didSelect(option: MGSelectorOption) {
-        title = option.title
+    func didSelect(options: [MGSelectorOption]) {
+        title = options.map { $0.title }.reduce("", +)
     }
     
 }

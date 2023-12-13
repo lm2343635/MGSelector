@@ -25,6 +25,11 @@
 
 import UIKit
 
+public enum MGSelectorMode {
+    case single(selectedIndex: Int)
+    case multiple(selectedIndexes: [Int])
+}
+
 public protocol MGSelectorOption {
     var icon: UIImage? { get }
     var title: String { get }
@@ -33,7 +38,7 @@ public protocol MGSelectorOption {
 }
 
 public protocol MGSelectable: AnyObject {
-    func didSelect(option: MGSelectorOption)
+    func didSelect(options: [MGSelectorOption])
 }
 
 extension MGSelectable where Self: UIViewController {
@@ -41,13 +46,13 @@ extension MGSelectable where Self: UIViewController {
     public func openSelector(
         title: String?,
         options: [MGSelectorOption],
-        selectedIndex: Int = 0,
+        mode: MGSelectorMode = .single(selectedIndex: 0),
         theme: MGSelectorTheme = .light()
     ) {
         let selector = MGSelectorViewController(
             title: title,
             options: options,
-            selectedIndex: selectedIndex,
+            mode: mode,
             theme: theme
         )
         selector.delegate = self
