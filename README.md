@@ -1,6 +1,6 @@
 # MGSelector
 
-![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg)
+![Swift 5.1](https://img.shields.io/badge/Swift-5.1-orange.svg)
 [![CI Status](https://img.shields.io/travis/lm2343635/MGSelector.svg?style=flat)](https://travis-ci.org/lm2343635/MGSelector)
 [![Version](https://img.shields.io/cocoapods/v/MGSelector.svg?style=flat)](https://cocoapods.org/pods/MGSelector)
 [![License](https://img.shields.io/cocoapods/l/MGSelector.svg?style=flat)](https://cocoapods.org/pods/MGSelector)
@@ -32,7 +32,9 @@ Prepare your model which confirms the MGSelectorModel protocol at first.
 
 ```Swift
 struct Option: MGSelectorOption {
+    var icon: UIImage?
     var title: String
+    var tag: String?
     var detail: String?
 }
 ```
@@ -45,11 +47,11 @@ class ViewController: UIViewController, MGSelectable {
     //...
 
     @IBAction func open(_ sender: UIButton) {
-        openSelector(title: "Title", options: options, theme: .dark)
+        openSelector(title: "Title", options: options, mode: .single(selectedIndex: 0), theme: .dark)
     }
     
-    func didSelect(option: MGSelectorOption) {
-        title = option.title
+    func didSelect(options: [MGSelectorOption]) {
+        title = options.map { $0.title }.reduce("", +)
     }
 }
 ```
