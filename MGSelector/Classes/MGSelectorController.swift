@@ -235,6 +235,11 @@ extension MGSelectorViewController: UITableViewDataSource {
 extension MGSelectorViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedOption = items[indexPath.row].option
+        delegate?.willSelect(option: selectedOption)
+        guard selectedOption.selectable else {
+            return
+        }
         switch mode {
         case .single:
             items = items.enumerated().map {
@@ -248,7 +253,8 @@ extension MGSelectorViewController: UITableViewDelegate {
                 )
             }
         }
-        delegate?.didSelect(options: items.filter { $0.selected }.map { $0.option })
+        delegate?.didSelect(option: selectedOption)
+        delegate?.didSelectedOptionsUpdated(options: items.filter { $0.selected }.map { $0.option })
         tableView.reloadData()
     }
     

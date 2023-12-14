@@ -23,7 +23,7 @@ fileprivate struct Const {
                              "Date", "Expect", "Forwarded", "From", "Host", "If-Match", "If-Modified-Since",
                              "If-None-Match", "If-Range", "If-Unmodified-Since", "Max-Forwards",
                              "Origin", "Pragma", "Proxy-Authorization", "Range", "Referer",
-                             "User-Agent", "Upgrade", "Via", "Warning"]
+                             "User-Agent", "Upgrade", "Va", "Warning"]
 }
 
 class ViewController: UIViewController {
@@ -65,7 +65,11 @@ class ViewController: UIViewController {
 
 extension ViewController: MGSelectable {
     
-    func didSelect(options: [MGSelectorOption]) {
+    func willSelect(option: MGSelectorOption) {
+        print(option)
+    }
+    
+    func didSelectedOptionsUpdated(options: [MGSelectorOption]) {
         title = options.map { $0.title }.reduce("", +)
     }
     

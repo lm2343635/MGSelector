@@ -35,10 +35,26 @@ public protocol MGSelectorOption {
     var title: String { get }
     var tag: String? { get }
     var detail: String? { get }
+    var selectable: Bool { get }
+}
+
+public extension MGSelectorOption {
+    var icon: UIImage? { nil }
+    var tag: String? { nil }
+    var detail: String? { nil }
+    var selectable: Bool { true }
 }
 
 public protocol MGSelectable: AnyObject {
-    func didSelect(options: [MGSelectorOption])
+    func willSelect(option: MGSelectorOption)
+    func didSelect(option: MGSelectorOption)
+    func didSelectedOptionsUpdated(options: [MGSelectorOption])
+}
+
+public extension MGSelectable {
+    func willSelect(option: MGSelectorOption) {}
+    func didSelect(option: MGSelectorOption) {}
+    func didSelectedOptionsUpdated(options: [MGSelectorOption]) {}
 }
 
 extension MGSelectable where Self: UIViewController {
