@@ -74,6 +74,12 @@ extension MGSelectable where Self: UIViewController {
         selector.delegate = self
         present(selector, animated: true)
     }
+    
+    public func closeSelector() {
+        if presentedViewController is MGSelectorViewController {
+            presentedViewController?.dismiss(animated: true)
+        }
+    }
 
 }
 
