@@ -33,6 +33,22 @@ public struct MGSelectorTheme {
     var tagTextColor: UIColor
     var tagBackgroundColor: UIColor
     
+    public init(
+        maskColor: UIColor,
+        backgroundColor: UIColor,
+        mainColor: UIColor,
+        secondaryColor: UIColor,
+        tagTextColor: UIColor,
+        tagBackgroundColor: UIColor
+    ) {
+        self.maskColor = maskColor
+        self.backgroundColor = backgroundColor
+        self.mainColor = mainColor
+        self.secondaryColor = secondaryColor
+        self.tagTextColor = tagTextColor
+        self.tagBackgroundColor = tagBackgroundColor
+    }
+    
     public static func light(tagBackgroundColor: UIColor = .darkGray) -> MGSelectorTheme {
         return MGSelectorTheme(
             maskColor: UIColor(white: 0, alpha: 0.7),
@@ -50,6 +66,41 @@ public struct MGSelectorTheme {
             backgroundColor: .darkGray,
             mainColor: .white,
             secondaryColor: .lightGray,
+            tagTextColor: .white,
+            tagBackgroundColor: tagBackgroundColor
+        )
+    }
+    
+    public static func automatic(tagBackgroundColor: UIColor = .darkGray) -> MGSelectorTheme {
+        return MGSelectorTheme(
+            maskColor: UIColor(dynamicProvider: { t in
+                if t.userInterfaceStyle == .dark {
+                    return UIColor(white: 0, alpha: 0.5)
+                } else {
+                    return UIColor(white: 0, alpha: 0.7)
+                }
+            }),
+            backgroundColor: UIColor(dynamicProvider: { t in
+                if t.userInterfaceStyle == .dark {
+                    return .darkGray
+                } else {
+                    return .white
+                }
+            }),
+            mainColor: UIColor(dynamicProvider: { t in
+                if t.userInterfaceStyle == .dark {
+                    return .white
+                } else {
+                    return .black
+                }
+            }),
+            secondaryColor: UIColor(dynamicProvider: { t in
+                if t.userInterfaceStyle == .dark {
+                    return .lightGray
+                } else {
+                    return .darkGray
+                }
+            }),
             tagTextColor: .white,
             tagBackgroundColor: tagBackgroundColor
         )
